@@ -1,3 +1,38 @@
 spring:
   application:
     name: spring-auth-emails
+  datasource:
+    url: jdbc:h2:mem:spring-auth-emails;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  thymeleaf:
+    cache: false
+
+server:
+  error:
+    include-message: always
+
+app:
+  base-url: ${APP_BASE_URL:http://localhost:8888}
+  verification-ttl-minutes: ${APP_VERIFICATION_TTL_MINUTES:60}
+  password-reset-ttl-minutes: ${APP_PASSWORD_RESET_TTL_MINUTES:60}
+  security:
+    signing-secret: ${APP_SIGNING_SECRET:change-me-demo-signing-secret}
+  mail:
+    api-token: ${MAILTRAP_API_TOKEN:}
+    from-email: ${MAILTRAP_MAIL_FROM_EMAIL:[email protected]}
+    from-name: ${MAILTRAP_MAIL_FROM_NAME:Spring Auth Emails Demo}
+    use-sandbox: ${MAILTRAP_USE_SANDBOX:false}
+    sanbox-inbox-id: ${MAILTRAP_SANDBOX_INBOX_ID:0}
