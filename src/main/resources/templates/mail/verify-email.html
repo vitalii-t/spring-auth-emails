@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body style="font-family: Arial, sans-serif; color: #18181b; line-height: 1.5;">
+<p>Hi <span th:text="${name}">User</span>,</p>
+<p>Thanks for registering. Verify your email address to unlock protected pages in the demo app.</p>
+<p>
+    <a th:href="${verificationUrl}" style="display: inline-block; padding: 10px 14px; background: #18181b; color: #ffffff; text-decoration: none;">
+        Verify email
+    </a>
+</p>
+<p>If the button does not work, open this URL:</p>
+<p th:text="${verificationUrl}">Verification URL</p>
+</body>
+</html>
