@@ -3,6 +3,7 @@ package com.auth.emails.springauthemails.web;
 import com.auth.emails.springauthemails.auth.RegistrationService;
 import com.auth.emails.springauthemails.user.AppUserPrincipal;
 import com.auth.emails.springauthemails.user.User;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +25,7 @@ public class AuthController {
     @GetMapping("/register")
     public String showRegister(Model model) {
         model.addAttribute("form", new AuthForms.RegisterForm());
+
         return "auth/register";
     }
 
@@ -31,7 +33,7 @@ public class AuthController {
     public String register(
         @Valid @ModelAttribute("form") AuthForms.RegisterForm form,
         BindingResult bindingResult,
-        jakarta.servlet.http.HttpServletRequest request
+        HttpServletRequest request
     ) {
         if (!form.password().equals(form.confirmPassword())) {
             bindingResult.rejectValue("confirmPassword", "mismatch", "Passwords do not match");
@@ -54,6 +56,7 @@ public class AuthController {
                 HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
                 SecurityContextHolder.getContext()
             );
+
             return "redirect:/verify-email";
         } catch (IllegalArgumentException exception) {
             bindingResult.rejectValue("email", "duplicate", exception.getMessage());

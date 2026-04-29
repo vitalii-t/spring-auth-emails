@@ -65,12 +65,14 @@ public class PasswordResetService {
         user.setPasswordHash(passwordEncoder.encode(newPassword));
         token.setUsedAt(Instant.now(clock));
         passwordResetTokenRepository.deleteByUser(user);
+
         return PasswordResetResult.SUCCESS;
     }
 
     private String generateToken() {
         byte[] bytes = new byte[32];
         secureRandom.nextBytes(bytes);
+
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 

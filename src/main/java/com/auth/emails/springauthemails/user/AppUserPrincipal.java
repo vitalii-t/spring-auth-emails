@@ -3,15 +3,19 @@ package com.auth.emails.springauthemails.user;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class AppUserPrincipal implements UserDetails {
 
+    @Getter
     private final Long id;
     private final String email;
     private final String passwordHash;
+    @Getter
     private final boolean verified;
 
     public AppUserPrincipal(User user) {
@@ -19,14 +23,6 @@ public class AppUserPrincipal implements UserDetails {
         this.email = user.getEmail();
         this.passwordHash = user.getPasswordHash();
         this.verified = user.isVerified();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public boolean isVerified() {
-        return verified;
     }
 
     @Override

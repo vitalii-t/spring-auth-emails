@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.auth.emails.springauthemails.config.AppProperties;
 import com.auth.emails.springauthemails.user.User;
+
+import java.lang.reflect.Field;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -68,7 +70,7 @@ class VerificationLinkSignerTest {
 
     private void setId(User user, long id) {
         try {
-            java.lang.reflect.Field field = User.class.getDeclaredField("id");
+            Field field = User.class.getDeclaredField("id");
             field.setAccessible(true);
             field.set(user, id);
         } catch (ReflectiveOperationException exception) {

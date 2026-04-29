@@ -13,6 +13,7 @@ public class HomeController {
         if (authentication == null || !(authentication.getPrincipal() instanceof AppUserPrincipal principal)) {
             return "redirect:/login";
         }
+
         return principal.isVerified() ? "redirect:/dashboard" : "redirect:/verify-email";
     }
 }

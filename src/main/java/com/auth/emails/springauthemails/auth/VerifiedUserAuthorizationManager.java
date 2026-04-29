@@ -20,6 +20,7 @@ public class VerifiedUserAuthorizationManager implements AuthorizationManager<Re
         if (authentication == null || !(authentication.getPrincipal() instanceof AppUserPrincipal principal)) {
             return new AuthorizationDecision(false);
         }
+
         return new AuthorizationDecision(principal.isVerified());
     }
 }

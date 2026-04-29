@@ -12,6 +12,7 @@ public class TokenHasher {
     public String sha256(String value) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
             return HexFormat.of().formatHex(digest.digest(value.getBytes(StandardCharsets.UTF_8)));
         } catch (NoSuchAlgorithmException exception) {
             throw new IllegalStateException("SHA-256 is not available", exception);

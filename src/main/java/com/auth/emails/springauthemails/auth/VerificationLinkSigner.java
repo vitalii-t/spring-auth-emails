@@ -27,7 +27,9 @@ public class VerificationLinkSigner {
             .plusSeconds(appProperties.verificationTtlMinutes() * 60)
             .getEpochSecond();
         String signature = sign(payload(user.getId(), user.getEmail(), expiresAt));
-        return new SignedVerificationLink(user.getId(), expiresAt, signature);
+
+        return
+            new SignedVerificationLink(user.getId(), expiresAt, signature);
     }
 
     public boolean isValid(User user, long expiresAt, String signature) {
@@ -36,6 +38,7 @@ public class VerificationLinkSigner {
             return false;
         }
         String expected = sign(payload(user.getId(), user.getEmail(), expiresAt));
+
         return MessageDigest.isEqual(
             expected.getBytes(StandardCharsets.UTF_8),
             signature.getBytes(StandardCharsets.UTF_8)
@@ -54,6 +57,7 @@ public class VerificationLinkSigner {
                 "HmacSHA256"
             ));
             byte[] digest = mac.doFinal(payload.getBytes(StandardCharsets.UTF_8));
+
             return Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
         } catch (Exception exception) {
             throw new IllegalStateException("Could not sign verification link", exception);

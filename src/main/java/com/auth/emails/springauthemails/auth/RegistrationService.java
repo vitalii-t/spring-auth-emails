@@ -28,6 +28,7 @@ public class RegistrationService {
 
         User savedUser = userRepository.save(user);
         verificationService.sendVerificationEmail(savedUser);
+
         return savedUser;
     }
 }

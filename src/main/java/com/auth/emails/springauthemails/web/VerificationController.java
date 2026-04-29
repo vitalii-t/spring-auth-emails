@@ -29,6 +29,7 @@ public class VerificationController {
             return "redirect:/dashboard";
         }
         model.addAttribute("email", principal.getUsername());
+
         return "auth/verify-email";
     }
 
@@ -37,6 +38,7 @@ public class VerificationController {
         User user = userRepository.findByEmailIgnoreCase(authentication.getName()).orElseThrow();
         verificationService.sendVerificationEmail(user);
         redirectAttributes.addFlashAttribute("status", "Verification link sent.");
+
         return "redirect:/verify-email";
     }
 
@@ -68,6 +70,7 @@ public class VerificationController {
         }
 
         redirectAttributes.addFlashAttribute("status", "Email verified successfully. You can access the dashboard now.");
+
         return "redirect:/login";
     }
 }

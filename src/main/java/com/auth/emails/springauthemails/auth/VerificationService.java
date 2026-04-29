@@ -32,12 +32,15 @@ public class VerificationService {
     @Transactional
     public boolean verifyUser(long userId, long expiresAt, String signature) {
         User user = userRepository.findById(userId).orElse(null);
+
         if (user == null || !verificationLinkSigner.isValid(user, expiresAt, signature)) {
             return false;
         }
+
         if (!user.isVerified()) {
             user.setEmailVerifiedAt(Instant.now(clock));
         }
+
         return true;
     }
 }

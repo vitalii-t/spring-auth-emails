@@ -22,6 +22,7 @@ public class PasswordResetController {
     @GetMapping("/forgot-password")
     public String showForgotPassword(Model model) {
         model.addAttribute("form", new AuthForms.ForgotPasswordForm());
+
         return "auth/forgot-password";
     }
 
@@ -36,6 +37,7 @@ public class PasswordResetController {
         }
         passwordResetService.sendResetLink(form.email());
         redirectAttributes.addFlashAttribute("status", "If that email is registered, we've sent a reset link.");
+
         return "redirect:/forgot-password";
     }
 
@@ -46,6 +48,7 @@ public class PasswordResetController {
         Model model
     ) {
         model.addAttribute("form", new AuthForms.ResetPasswordForm(token, email, "", ""));
+
         return "auth/reset-password";
     }
 
@@ -58,6 +61,7 @@ public class PasswordResetController {
         if (!form.password().equals(form.confirmPassword())) {
             bindingResult.rejectValue("confirmPassword", "mismatch", "Passwords do not match");
         }
+
         if (bindingResult.hasErrors()) {
             return "auth/reset-password";
         }
@@ -74,6 +78,7 @@ public class PasswordResetController {
         }
 
         redirectAttributes.addFlashAttribute("status", "Password updated successfully. Please sign in.");
+
         return "redirect:/login";
     }
 }

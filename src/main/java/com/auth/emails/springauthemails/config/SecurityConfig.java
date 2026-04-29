@@ -83,7 +83,7 @@ public class SecurityConfig {
         HttpServletRequest request,
         HttpServletResponse response,
         org.springframework.security.access.AccessDeniedException exception
-    ) throws IOException, ServletException {
+    ) throws IOException {
         Authentication authentication = (Authentication) request.getUserPrincipal();
         if (authentication != null && authentication.isAuthenticated()) {
             response.sendRedirect("/verify-email");
