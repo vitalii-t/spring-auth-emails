@@ -27,22 +27,25 @@ Demo Spring Boot project showing a production-like auth flow with Mailtrap email
 1. Register at `/register`.
 2. The app creates an unverified user, signs the user in, and sends a Mailtrap verification email.
 3. Until the email is verified, `/dashboard` redirects to `/verify-email`.
-4. The verification email contains a signed URL. When opened, the app validates the signature and marks the user verified.
+4. The verification email contains a signed URL. When opened, the app validates the signature and marks the user
+   verified.
 5. Forgot-password sends a reset email with a random token.
 6. The reset token is stored hashed in the H2 database and expires after 60 minutes.
 7. A successful password reset updates the password and invalidates the reset token.
 
 ## Environment variables
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `APP_BASE_URL` | No | `http://localhost:8080` | Public base URL used in verification and reset links |
-| `APP_SIGNING_SECRET` | Yes | `change-me-demo-signing-secret` | HMAC secret used to sign verification links. Replace for real use |
-| `APP_VERIFICATION_TTL_MINUTES` | No | `60` | Verification link lifetime |
-| `APP_PASSWORD_RESET_TTL_MINUTES` | No | `60` | Password reset token lifetime |
-| `MAILTRAP_API_TOKEN` | Yes | empty | Mailtrap API token |
-| `MAIL_FROM_EMAIL` | Yes | `[email protected]` | Sender email |
-| `MAIL_FROM_NAME` | No | `Spring Auth Emails Demo` | Sender display name |
+| Variable                         | Required | Default                         | Description                                                       |
+|----------------------------------|----------|---------------------------------|-------------------------------------------------------------------|
+| `APP_BASE_URL`                   | No       | `http://localhost:8080`         | Public base URL used in verification and reset links              |
+| `APP_SIGNING_SECRET`             | Yes      | `change-me-demo-signing-secret` | HMAC secret used to sign verification links. Replace for real use |
+| `APP_VERIFICATION_TTL_MINUTES`   | No       | `60`                            | Verification link lifetime                                        |
+| `APP_PASSWORD_RESET_TTL_MINUTES` | No       | `60`                            | Password reset token lifetime                                     |
+| `MAILTRAP_API_TOKEN`             | Yes      | empty                           | Mailtrap API token                                                |
+| `MAILTRAP_MAIL_FROM_EMAIL`       | Yes      | `[email protected]`             | Sender email                                                      |
+| `MAILTRAP_MAIL_FROM_NAME`        | No       | `Spring Auth Emails Demo`       | Sender display name                                               |
+| `MAILTRAP_USE_SANDBOX`           | No       | `false`                         | If you want to test it first, using Mailtrap Sandbox API          |
+| `MAILTRAP_SANDBOX_INBOX_ID`      | No       | `12345`                         | Your inboxId in Sandbox                                           |
 
 ## Run locally
 
@@ -81,4 +84,5 @@ On Windows:
 
 - The UI is intentionally minimal.
 - Tests are limited to unit tests for core services and signing logic.
-- Mail sending uses the official Mailtrap Java SDK. Reference: [Mailtrap Java SDK guide](https://docs.mailtrap.io/guides/sdk/java)
+- Mail sending uses the official Mailtrap Java SDK.
+  Reference: [Mailtrap Java SDK guide](https://docs.mailtrap.io/guides/sdk/java)
