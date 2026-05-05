@@ -1,6 +1,6 @@
 # Spring Auth Emails Demo
 
-Demo Spring Boot project showing a production-like auth flow with Mailtrap email delivery.
+Demo Spring Boot project showing a production-like auth flow with Mailtrap api.
 
 ## Scope
 
