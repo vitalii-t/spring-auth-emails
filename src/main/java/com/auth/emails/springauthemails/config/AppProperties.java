@@ -24,7 +24,7 @@ public record AppProperties(
         @NotBlank String fromEmail,
         @NotBlank String fromName,
         boolean useSandbox,
-        long sanboxInboxId
+        long sandboxInboxId
     ) {
     }
 }

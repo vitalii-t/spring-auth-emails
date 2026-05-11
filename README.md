@@ -1,6 +1,6 @@
 # Spring Auth Emails Demo
 
-Demo Spring Boot project showing a production-like auth flow with Mailtrap api.
+Demo Spring Boot project showing a production-like auth flow with the Mailtrap API.
 
 ## Scope
 
@@ -35,41 +35,49 @@ Demo Spring Boot project showing a production-like auth flow with Mailtrap api.
 
 ## Environment variables
 
-| Variable                         | Required | Default                         | Description                                                       |
-|----------------------------------|----------|---------------------------------|-------------------------------------------------------------------|
-| `APP_BASE_URL`                   | No       | `http://localhost:8080`         | Public base URL used in verification and reset links              |
-| `APP_SIGNING_SECRET`             | Yes      | `change-me-demo-signing-secret` | HMAC secret used to sign verification links. Replace for real use |
-| `APP_VERIFICATION_TTL_MINUTES`   | No       | `60`                            | Verification link lifetime                                        |
-| `APP_PASSWORD_RESET_TTL_MINUTES` | No       | `60`                            | Password reset token lifetime                                     |
-| `MAILTRAP_API_TOKEN`             | Yes      | empty                           | Mailtrap API token                                                |
-| `MAILTRAP_MAIL_FROM_EMAIL`       | Yes      | `[email protected]`             | Sender email                                                      |
-| `MAILTRAP_MAIL_FROM_NAME`        | No       | `Spring Auth Emails Demo`       | Sender display name                                               |
-| `MAILTRAP_USE_SANDBOX`           | No       | `false`                         | If you want to test it first, using Mailtrap Sandbox API          |
-| `MAILTRAP_SANDBOX_INBOX_ID`      | No       | `12345`                         | Your inboxId in Sandbox                                           |
+| Variable                         | Required | Default                         | Description                                                                     |
+|----------------------------------|----------|---------------------------------|---------------------------------------------------------------------------------|
+| `SERVER_PORT`                    | No       | `8080`                          | HTTP port used by the app                                                       |
+| `APP_BASE_URL`                   | No       | `http://localhost:${SERVER_PORT}` | Public base URL used in verification and reset links                          |
+| `APP_SIGNING_SECRET`             | No       | `change-me-demo-signing-secret` | HMAC secret used to sign verification links. Replace it outside demo use        |
+| `APP_VERIFICATION_TTL_MINUTES`   | No       | `60`                            | Verification link lifetime                                                      |
+| `APP_PASSWORD_RESET_TTL_MINUTES` | No       | `60`                            | Password reset token lifetime                                                   |
+| `MAILTRAP_API_TOKEN`             | Yes      | empty                           | Mailtrap API token                                                              |
+| `MAILTRAP_MAIL_FROM_EMAIL`       | No       | `[email protected]`             | Sender email                                                                    |
+| `MAILTRAP_MAIL_FROM_NAME`        | No       | `Spring Auth Emails Demo`       | Sender display name                                                             |
+| `MAILTRAP_USE_SANDBOX`           | No       | `false`                         | Enable Mailtrap Sandbox API                                                     |
+| `MAILTRAP_SANDBOX_INBOX_ID`      | Conditional | `0`                           | Required when `MAILTRAP_USE_SANDBOX=true`; identifies the Mailtrap sandbox inbox |
 
 ## Run locally
 
 1. Set environment variables.
-2. Start the app:
+
+macOS/Linux:
 
 ```bash
+export MAILTRAP_API_TOKEN=your-mailtrap-token
+export APP_SIGNING_SECRET=replace-me
+export SERVER_PORT=8080
 ./mvnw spring-boot:run
 ```
 
-On Windows:
+Windows PowerShell:
 
 ```powershell
+$env:MAILTRAP_API_TOKEN="your-mailtrap-token"
+$env:APP_SIGNING_SECRET="replace-me"
+$env:SERVER_PORT="8080"
 .\mvnw.cmd spring-boot:run
 ```
 
-3. Open `http://localhost:8080`.
+2. Open `http://localhost:8080` by default, or `http://localhost:<your-port>` if you changed `SERVER_PORT`.
 
 ## H2
 
 - JDBC URL: `jdbc:h2:mem:spring-auth-emails`
 - Username: `sa`
 - Password: empty
-- Console: `http://localhost:8080/h2-console`
+- Console: `http://localhost:8080/h2-console` by default, or `http://localhost:<your-port>/h2-console` if you changed `SERVER_PORT`
 
 ## Main routes
 

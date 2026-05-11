@@ -21,11 +21,12 @@ spring:
     cache: false
 
 server:
+  port: ${SERVER_PORT:8888}
   error:
     include-message: always
 
 app:
-  base-url: ${APP_BASE_URL:http://localhost:8888}
+  base-url: ${APP_BASE_URL:http://localhost:${server.port}}
   verification-ttl-minutes: ${APP_VERIFICATION_TTL_MINUTES:60}
   password-reset-ttl-minutes: ${APP_PASSWORD_RESET_TTL_MINUTES:60}
   security:
@@ -35,4 +36,4 @@ app:
     from-email: ${MAILTRAP_MAIL_FROM_EMAIL:[email protected]}
     from-name: ${MAILTRAP_MAIL_FROM_NAME:Spring Auth Emails Demo}
     use-sandbox: ${MAILTRAP_USE_SANDBOX:false}
-    sanbox-inbox-id: ${MAILTRAP_SANDBOX_INBOX_ID:0}
+    sandbox-inbox-id: ${MAILTRAP_SANDBOX_INBOX_ID:0}

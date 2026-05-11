@@ -17,7 +17,7 @@ public class MailtrapConfig {
         if (properties.mail().useSandbox()) {
             builder
                 .sandbox(true)
-                .inboxId(properties.mail().sanboxInboxId());
+                .inboxId(properties.mail().sandboxInboxId());
         }
 
         return
